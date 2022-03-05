@@ -5,20 +5,20 @@ export default class Slide {
   }
 
   onStart(event) {
-   event.preventDefault();
-   console.log(this)
+    event.preventDefault();
+    console.log(this)
   }
 
   addSlideEvents() {
     this.wrapper.addEventListener("mousedown", this.onStart);
   }
 
-  // bindEvents() {
-  //   this.onStart() = this.onStart.bind(this);
-  // }
+  bindEvents() {
+    this.onStart = this.onStart.bind(this);
+  }
 
   init() {
-    //this.bindEvents();
+    this.bindEvents();
     this.addSlideEvents();
     return this;
   }
