@@ -9,6 +9,23 @@ export default class Slide {
     };
   }
 
+  changeSlide(index) {
+    this.moveSlide(this.slideArray[index].position);
+    this.slidesIndexNav(index);
+  }
+  slidesIndexNav(index) {
+    this.index = {
+      prev: 0,
+      active: 0,
+      next: 0
+    }
+  }
+
+  slidePosition(slide) {
+    const margin = (this.wrapper.offsetWidth - slide.offsetWidth) / 2;
+    return -(slide.offsetLeft - margin);
+  }
+
   moveSlide(distX) {
     this.dist.movePosition = distX;
     this.slide.style.transform = `translate3d(${distX}px, 0, 0)`;
@@ -42,7 +59,7 @@ export default class Slide {
   }
 
   onEnd(event) {
-    const movetype = (event.type === 'mouseup') ? 'mousemove' : 'touchmove'
+    const movetype = event.type === "mouseup" ? "mousemove" : "touchmove";
     this.wrapper.removeEventListener(movetype, this.onMove);
     this.dist.finalPosition = this.dist.movePosition;
   }
@@ -60,9 +77,18 @@ export default class Slide {
     this.onEnd = this.onEnd.bind(this);
   }
 
+  slidesConfig() {
+    this.slideArray = [...this.slide.children].map((element) => {
+      const position = this.slidePosition(element);
+      return { position, element };
+    });
+    console.log(this.slideArray);
+  }
+
   init() {
     this.bindEvents();
     this.addSlideEvents();
+    this.slidesConfig();
     return this;
   }
 }
