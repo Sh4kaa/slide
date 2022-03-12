@@ -26,3 +26,7 @@ img {
   margin: 0 20px;
 }
 
+.slide {
+  transform: translate3d(-1600.5px, 0, 0)
+}
+
