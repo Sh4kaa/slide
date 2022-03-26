@@ -109,3 +109,11 @@ img {
 .arrow-nav button.prev {
   transform: rotate(-180deg);
 }
+
+.arrow-nav .prev:hover {
+  filter: brightness(50%);
+}
+
+.arrow-nav .next:hover {
+  filter: brightness(50%);
+}
